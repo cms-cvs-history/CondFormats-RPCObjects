@@ -10,4 +10,10 @@
 <use name=CondFormats/DataRecord>
 <use name=FWCore/Services>	
 <bin name=testRPCWriteMap file=testWriteMap.cpp></bin>
+
+<library file=stubs/RPCReadOutMapPrint.cc name=RPCReadOutMapPrint>
+    <flags SEAL_PLUGIN_NAME="RPCReadOutMapPrint">
+</library>
+
 </environment>
+
