@@ -48,14 +48,10 @@ int main(){
 				       ichannel,regionId,diskId,
 				       stationId,sectorId,layerId,
 				       subsectorId,rollId,stripId);
-      std::string mytok=rowriter.markWrite<RPCReadOutMapping>(rpcro);
-      if(ichannel<=5){
-	roiov->iov.insert(std::make_pair(100+ichannel,mytok)); 
-      }else{
-	roiov->iov.insert(std::make_pair(200+ichannel,mytok));
-      }
     }
-
+    
+    std::string mytok=rowriter.markWrite<RPCReadOutMapping>(rpcro);
+    roiov->iov.insert(std::make_pair(10,mytok));     
     std::string roiovToken=iovwriter.markWrite<cond::IOV>(roiov);  
     session1->commit();//commit all in one
     session1->disconnect();
