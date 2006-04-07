@@ -51,7 +51,7 @@ int main(){
     }
     
     std::string mytok=rowriter.markWrite<RPCReadOutMapping>(rpcro);
-    roiov->iov.insert(std::make_pair(10,mytok));     
+    roiov->iov.insert(std::make_pair(0,mytok));     
     std::string roiovToken=iovwriter.markWrite<cond::IOV>(roiov);  
     session1->commit();//commit all in one
     session1->disconnect();
