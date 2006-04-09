@@ -1,10 +1,3 @@
-
-/*----------------------------------------------------------------------
-
-Toy EDProducers and EDProducts for testing purposes only.
-
-----------------------------------------------------------------------*/
-
 #include <stdexcept>
 #include <string>
 #include <iostream>
@@ -23,13 +16,13 @@ Toy EDProducers and EDProducts for testing purposes only.
 
 
 RPCReadOutMapPrint::RPCReadOutMapPrint(edm::ParameterSet const& p) 
-{}
+{std::cout <<"Construct :"<<std::endl;}
 
 RPCReadOutMapPrint::RPCReadOutMapPrint(int i) 
-{}
+{std::cout <<"Construct :"<<i<<std::endl;}
 
 RPCReadOutMapPrint::~RPCReadOutMapPrint() 
-{}
+{std::cout <<"DeConstruct :"<<std::endl;}
 
 void 
 RPCReadOutMapPrint::analyze(const edm::Event& e,
@@ -46,5 +39,19 @@ RPCReadOutMapPrint::analyze(const edm::Event& e,
 
     std::cout << std::distance( rpcmap->begin(), rpcmap->end() ) 
 	      << " connections in the map" << std::endl;
+    const RPCReadOutMapping* _m=rpcmap.product();
+    for (RPCReadOutMapping::const_iterator i=_m->begin(); i<_m->end();
+	 i++){
+      std::cout<<"dcc="<<i->dccId<<" rmb="<<i->tbId<<" lbox="<<i->lboxId
+	       <<" mb="<<i->mbId<<" lboard="<<i->lboardId
+	       <<" channel="<<i->channelId<<"\n----->\n"
+	       <<"region="<<i->regionId<<" disk="<<i->diskId
+	       <<" station="<<i->stationId<<" sector="<<i->sectorId
+	       <<" layer="<<i->layerId<<" subsector"<<i->subsectorId
+	       <<" roll="<<i->rollId<<" strip="<<i->stripId
+	       <<"\n=============================================\n"
+	       <<std::endl;
+    }
+    
 }
 DEFINE_FWK_MODULE(RPCReadOutMapPrint)
