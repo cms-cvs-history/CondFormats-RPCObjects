@@ -20,7 +20,8 @@ int main(){
   loader->loadAuthenticationService( cond::Env );
   loader->loadMessageService( cond::Error );
   try{
-    cond::DBSession* session1=new cond::DBSession(std::string("sqlite_file:RPCReadOutMap.db"));
+    cond::DBSession* session1=new 
+      cond::DBSession(std::string("sqlite_file:RPCReadOutMap.db"));
     session1->setCatalog("file:rpccatalog.xml");
     session1->connect(cond::ReadWriteCreate);
     cond::DBWriter rowriter(*session1, "ReadOutMap");
@@ -51,7 +52,8 @@ int main(){
     }
     
     std::string mytok=rowriter.markWrite<RPCReadOutMapping>(rpcro);
-    roiov->iov.insert(std::make_pair(0,mytok));     
+    unsigned long infiov =  edm::IOVSyncValue::endOfTime().eventID().run(); 
+    roiov->iov.insert(std::make_pair(infiov,mytok));     
     std::string roiovToken=iovwriter.markWrite<cond::IOV>(roiov);  
     session1->commit();//commit all in one
     session1->disconnect();
