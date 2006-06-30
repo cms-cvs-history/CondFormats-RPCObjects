@@ -1,19 +1,26 @@
 <environment>
-<use name=clhep>
-<use name=FWCore/ParameterSet>
-<use name=CondFormats/RPCObjects>
-<use name=CondCore/DBCommon>
-<use name=CondCore/IOVService>
-<use name=CondCore/MetaDataService>
-<use name=CondCore/ESSources>
-<use name=FWCore/Framework>	
-<use name=CondFormats/DataRecord>
-<use name=FWCore/Services>	
-<bin name=testRPCWriteMap file=testWriteMap.cpp></bin>
+  <use name=FWCore/Framework>
+  <use name=Geometry/Records>
 
-<library file=stubs/RPCReadOutMapPrint.cc name=RPCReadOutMapPrint>
-    <flags SEAL_PLUGIN_NAME="RPCReadOutMapPrint">
+  <use name=DataFormats/FEDRawData> 
+  <use name=CondFormats/DataRecord>
+  <use name=CondFormats/RPCObjects>
+  <use name=CondCore/DBCommon>
+  <use name=CondCore/ESSources>
+  <use name=CondCore/IOVService>
+  <use name=CondCore/MetaDataService>
+
+  <library file=RPCReadOutMapBuilder.cc name=RPCReadOutMapBuilder>
+  <flags SEAL_PLUGIN_NAME="RPCReadOutMapBuilder">
 </library>
+</environment>
 
+<environment>
+  <use name=boost>
+  <use name=CondFormats/RPCObjects>
+  <use name=CondFormats/DataRecord>
+  <library file=RPCReadOutMapAnalyzer.cc name=RPCReadOutMapAnalyzer>
+  <flags SEAL_PLUGIN_NAME="RPCReadOutMapAnalyzer">
+</library>
 </environment>
 
