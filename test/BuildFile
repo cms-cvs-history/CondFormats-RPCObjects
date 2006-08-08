@@ -24,3 +24,15 @@
 </library>
 </environment>
 
+
+
+<environment>
+  <use name=boost>
+  <use name=CondFormats/RPCObjects>
+  <use name=CondFormats/DataRecord>
+  <use name=DataFormats/RPCDigi>
+  <use name=DataFormats/DTDigi>
+  <library file=TestPulseAnalyzer.cc name=TestPulseAnalyzer>
+  <flags SEAL_PLUGIN_NAME="TestPulseAnalyzer">
+</library>
+</environment>
