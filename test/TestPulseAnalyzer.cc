@@ -145,21 +145,23 @@ void TestPulseAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup
    cout <<"--- --- --- --- --- --- --- --- ---"<<endl; 
    vector<LBtestWord> testSet = readTestVectors("0_pulse.dat");
    const string chName="RE+1/2/27";
-   std::vector<const LinkBoardSpec*> a = map->getLBforChamber(chName);
-   //const ChamberStripSpec * aStrip = a[0]->strip(15);
+   uint32_t detId = 637570205;
+   //std::vector<const LinkBoardSpec*> a = map->getLBforChamber(chName);//
    bitset<96> testVector = testSet[0];
    cout<<"testVector: "<<testVector<<endl;
    cout<<"The following strips should be fired: "<<endl;
    for(int i=0;i<96;i++){
      if(testVector[i]){
-       int strip = a[0]->strip(i).second;
+       //int strip = a[0]->strip(i).second;
+       std::pair<ChamberRawDataSpec, int> 
+	 linkboard = map->getRAWSpecForCMSChamberSrip(detId,i);
+       int strip = map->strip(linkboard.first,i).second;
        cout<<"Chamber: "<<chName
 	   <<" strips: "<<strip<<endl;
 	   
      }
    }
    cout<<"RAW for strip in chamber: "<<endl;
-   uint32_t detId = 637570205;
    for(int i=16;i<100;i++){
    int stripNumber = i;
    std::pair<ChamberRawDataSpec, int>  
