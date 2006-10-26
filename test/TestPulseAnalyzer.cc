@@ -182,4 +182,4 @@ void TestPulseAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup
 
 
 //define this as a plug-in
-DEFINE_FWK_MODULE(TestPulseAnalyzer)
+DEFINE_FWK_MODULE(TestPulseAnalyzer);
