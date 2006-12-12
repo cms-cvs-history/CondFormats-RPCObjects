@@ -154,7 +154,7 @@ void TestPulseAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup
      if(testVector[i]){
        //int strip = a[0]->strip(i).second;
        std::pair<ChamberRawDataSpec, int> 
-	 linkboard = map->getRAWSpecForCMSChamberSrip(detId,i);
+	 linkboard = map->getRAWSpecForCMSChamberSrip(detId,i,12);
        int strip = map->strip(linkboard.first,i).second;
        cout<<"Chamber: "<<chName
 	   <<" strips: "<<strip<<endl;
@@ -165,7 +165,7 @@ void TestPulseAnalyzer::analyze( const edm::Event& iEvent, const edm::EventSetup
    for(int i=16;i<100;i++){
    int stripNumber = i;
    std::pair<ChamberRawDataSpec, int>  
-     linkboard = map->getRAWSpecForCMSChamberSrip(detId,stripNumber);
+     linkboard = map->getRAWSpecForCMSChamberSrip(detId,stripNumber,12);
    cout<<"Link: "<<linkboard.first.tbLinkInputNum<<endl;
    cout<<"LinkChannel: "<<linkboard.first.lbNumInLink<<endl;
    cout<<"LinkLeftBit: "<<linkboard.second<<endl;   
