@@ -1,14 +1,10 @@
 <environment>
   <use name=FWCore/Framework>
-  <use name=Geometry/Records>
 
   <use name=DataFormats/FEDRawData> 
   <use name=CondFormats/DataRecord>
   <use name=CondFormats/RPCObjects>
-  <use name=CondCore/DBCommon>
-  <use name=CondCore/ESSources>
-  <use name=CondCore/IOVService>
-  <use name=CondCore/MetaDataService>
+  <use name=CondCore/DBOutputService>
 
   <library file=RPCReadOutMapBuilder.cc name=RPCReadOutMapBuilder>
   <flags SEAL_PLUGIN_NAME="RPCReadOutMapBuilder">
@@ -19,6 +15,8 @@
   <use name=boost>
   <use name=CondFormats/RPCObjects>
   <use name=CondFormats/DataRecord>
+  <use name=CondCore/ESSources>
+
   <library file=RPCReadOutMapAnalyzer.cc name=RPCReadOutMapAnalyzer>
   <flags SEAL_PLUGIN_NAME="RPCReadOutMapAnalyzer">
 </library>
