@@ -100,8 +100,8 @@ std::vector< std::pair< LinkBoardElectronicIndex, LinkBoardPackedStrip> >
                 is = strips.begin(); is != strips.end(); is++) {
               const ChamberStripSpec & strip = (*is);
               int stripPinInFeb = strip.cablePinNumber;
-//              if ( strip.cmsStripNumber == stripInDU) {
-              if ( strip.chamberStripNumber == stripInDU) {
+              if ( strip.cmsStripNumber == stripInDU) {
+//              if ( strip.chamberStripNumber == stripInDU) {
                 result.push_back(
                     std::make_pair( eleIndex, LinkBoardPackedStrip( febInLB, stripPinInFeb) ) ); 
               }
@@ -146,8 +146,8 @@ RPCReadOutMapping::StripInDetUnit
     detUnit = feb->rawId();
     const ChamberStripSpec * strip = feb->strip(stripPinInFeb);
     if (strip) {
-//      stripInDU = strip->cmsStripNumber;
-        stripInDU = strip->chamberStripNumber;
+      stripInDU = strip->cmsStripNumber;
+//        stripInDU = strip->chamberStripNumber;
     } else {
       edm::LogError("detUnitFrame")<<"problem with stip for febInLB: "<<febInLB
                                    <<" strip pin: "<< stripPinInFeb
