@@ -1,6 +1,5 @@
 <environment>
   <use name=FWCore/Framework>
-
   <use name=DataFormats/FEDRawData> 
   <use name=CondFormats/DataRecord>
   <use name=CondFormats/RPCObjects>
@@ -15,8 +14,6 @@
   <use name=boost>
   <use name=CondFormats/RPCObjects>
   <use name=CondFormats/DataRecord>
-  <use name=CondCore/ESSources>
-
   <library file=RPCReadOutMapAnalyzer.cc name=RPCReadOutMapAnalyzer>
   <flags EDM_PLUGIN=1>
 </library>
