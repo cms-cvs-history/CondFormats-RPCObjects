@@ -55,7 +55,7 @@
   <class name="RPCStripNoises"/>
   <class name="RPCStripNoises::NoiseItem"/>
   <class name="std::vector<RPCStripNoises::NoiseItem>"/>
-  <class name="std::vector<double>"/>
+  <class name="std::vector<float>"/>
 
   <class pattern="*vector*"/>
   <class pattern="*map*"/>
