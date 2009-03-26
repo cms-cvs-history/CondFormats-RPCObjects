@@ -16,21 +16,34 @@
 //
 // Original Author:  Tomasz Fruboes
 //         Created:  Fri Feb 22 12:27:02 CET 2008
-// $Id: L1RPCConeBuilder.h,v 1.7 2009/03/20 10:28:29 fruboes Exp $
+// $Id: L1RPCConeBuilder.h,v 1.4 2008/12/12 13:57:14 fruboes Exp $
 //
 
 #include <vector>
 #include <map>
 #include <stdint.h>
 #include <cstdlib>
-#include "CondFormats/L1TObjects/interface/L1RPCConeDefinition.h"
 
+//#include "CondFormats/RPCObjects/interface/RPCConeConnection.h"
 
 class L1RPCConeBuilder
 {
    
    public:
+      //  For logplane sizes
+      typedef std::vector<int> TLogPlaneSize;
+      typedef std::vector<TLogPlaneSize > TLPSizesInTowers;
+      
+      // For (roll,hwplane)->tower mapping
+      typedef std::vector<int> TTowerList;
+      typedef std::vector<TTowerList > THWplaneToTower;
+      typedef std::vector<THWplaneToTower > TRingsToTowers;
 
+      
+      // For (roll,hwplane)->logplane mapping
+      typedef std::vector<int> TLPList;
+      typedef std::vector<TTowerList > THWplaneToLP;
+      typedef std::vector<THWplaneToTower > TRingsToLP;
 
       // uncompressed connections
       struct TStripCon{
@@ -58,28 +71,12 @@ class L1RPCConeBuilder
         TCompressedCon() : m_tower(99),  m_mul(99), m_PAC(0), 
           m_logplane(99), m_validForStripFirst(0), m_validForStripLast(0), m_offset(-1000){};
           
-        int getLogStrip(int strip, const L1RPCConeDefinition::TLPSizeVec & LPSizeVec) const{
+        int getLogStrip(int strip, const TLPSizesInTowers & LPSizesInTowers) const{
           int ret = -1;
           if ( strip >= m_validForStripFirst && strip <= m_validForStripLast ){ 
             ret = int(m_mul)*strip+int(m_offset);
           
-            int lpSize = -1;
-            L1RPCConeDefinition::TLPSizeVec::const_iterator it = LPSizeVec.begin();
-            L1RPCConeDefinition::TLPSizeVec::const_iterator itEnd = LPSizeVec.end();
-            for (;it!=itEnd;++it){
-            
-              if (it->m_tower != std::abs(m_tower) || it->m_LP != m_logplane-1) continue;
-              lpSize = it->m_size;
-            
-            }
-
-            //FIXME
-            if (lpSize==-1) {
-              //throw cms::Exception("getLogStrip") << " lpSize==-1\n";
-            }
-            
-            //if (ret<0 || ret > LPSizesInTowers.at(std::abs(m_tower)).at(m_logplane-1)  )
-            if (ret<0 || ret > lpSize )
+            if (ret<0 || ret > LPSizesInTowers.at(std::abs(m_tower)).at(m_logplane-1)  )
               return -1;
           
           }
@@ -109,6 +106,9 @@ class L1RPCConeBuilder
       L1RPCConeBuilder();
       virtual ~L1RPCConeBuilder();
 
+      void setLPSizeForTowers(const TLPSizesInTowers & lpSizes) { m_LPSizesInTowers = lpSizes;};
+      void setRingsToTowers(const TRingsToTowers & RingsToTowers) { m_RingsToTowers = RingsToTowers;};
+      void setRingsToLP(const TRingsToLP & RingsToLP) {m_RingsToLP = RingsToLP;};
             
       void setConeConnectionMap(const TConMap & connMap) { m_coneConnectionMap = connMap;};
       void setCompressedConeConnectionMap(const TCompressedConMap & cmpConnMap) 
@@ -123,15 +123,18 @@ class L1RPCConeBuilder
       void setFirstTower(int tow) {m_firstTower = tow;};
       void setLastTower(int tow) {m_lastTower = tow;};
       
-
+      const TLPSizesInTowers &  getLPSizes() const { return m_LPSizesInTowers;};
       
    private:
          
-     int m_firstTower;
-     int m_lastTower;
-
-     TConMap m_coneConnectionMap; 
-     TCompressedConMap m_compressedConeConnectionMap;
+      int m_firstTower;
+      int m_lastTower;
+      TLPSizesInTowers m_LPSizesInTowers;
+      TRingsToTowers m_RingsToTowers;
+      TRingsToLP m_RingsToLP;
+      
+      TConMap m_coneConnectionMap; 
+      TCompressedConMap m_compressedConeConnectionMap;
 };
 
 
