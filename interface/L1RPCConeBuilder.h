@@ -16,7 +16,7 @@
 //
 // Original Author:  Tomasz Fruboes
 //         Created:  Fri Feb 22 12:27:02 CET 2008
-// $Id: L1RPCConeBuilder.h,v 1.7 2009/03/20 10:28:29 fruboes Exp $
+// $Id: L1RPCConeBuilder.h,v 1.8 2009/03/20 15:10:53 michals Exp $
 //
 
 #include <vector>
@@ -24,6 +24,7 @@
 #include <stdint.h>
 #include <cstdlib>
 #include "CondFormats/L1TObjects/interface/L1RPCConeDefinition.h"
+#include <boost/shared_ptr.hpp>
 
 
 class L1RPCConeBuilder
@@ -110,9 +111,14 @@ class L1RPCConeBuilder
       virtual ~L1RPCConeBuilder();
 
             
-      void setConeConnectionMap(const TConMap & connMap) { m_coneConnectionMap = connMap;};
-      void setCompressedConeConnectionMap(const TCompressedConMap & cmpConnMap) 
-          {  m_compressedConeConnectionMap = cmpConnMap;};
+      void setConeConnectionMap(const boost::shared_ptr< TConMap > connMap) 
+                      { m_coneConnectionMap = connMap;};
+                      
+      void setCompressedConeConnectionMap(const boost::shared_ptr< TCompressedConMap >
+                                              cmpConnMap) 
+      {  
+            m_compressedConeConnectionMap = cmpConnMap;
+      };
       
       std::pair<TStripConVec::const_iterator, TStripConVec::const_iterator> 
           getConVec(uint32_t det, unsigned char strip) const ;
@@ -130,8 +136,8 @@ class L1RPCConeBuilder
      int m_firstTower;
      int m_lastTower;
 
-     TConMap m_coneConnectionMap; 
-     TCompressedConMap m_compressedConeConnectionMap;
+     boost::shared_ptr< TConMap > m_coneConnectionMap; 
+     boost::shared_ptr< TCompressedConMap >  m_compressedConeConnectionMap;
 };
 
 
