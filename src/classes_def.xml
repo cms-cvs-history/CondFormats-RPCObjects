@@ -35,8 +35,7 @@
   <class name="std::vector<RPCEMap::lbItem>"/>
   <class name="RPCEMap::febItem"/>
   <class name="std::vector<RPCEMap::febItem>"/>
-  <class name="RPCEMap::stripItem"/>
-  <class name="std::vector<RPCEMap::stripItem>"/>
+  <class name="std::vector<int>"/>
 
   <class name="L1RPCConeBuilder"/>
 
