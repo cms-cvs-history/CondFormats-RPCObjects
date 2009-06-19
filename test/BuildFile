@@ -8,7 +8,6 @@
   <library file=RPCReadOutMapBuilder.cc name=RPCReadOutMapBuilder>
   <flags EDM_PLUGIN=1>
 </library>
-
 </environment>
 
 <environment>
